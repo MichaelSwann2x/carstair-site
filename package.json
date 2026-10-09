@@ -1,0 +1,9 @@
+{
+  "name": "carstair-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Carstair static site",
+  "scripts": {
+    "build": "echo 'Static site - no build required' && exit 0"
+  }
+}
