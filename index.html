@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carstair — Research Laboratory for Quantitative Finance</title>
+  <meta name="description" content="Affordable institutional tools and materials for the masses. Strategy research, methodologies, systematic algorithms, and free resources." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f2ee;
+      --bg-side: #e8e4dc;
+      --bg-white: #faf9f7;
+      --text: #1a1814;
+      --text-muted: #5c574e;
+      --accent: #3d3529;
+      --border: rgba(26,24,20,0.12);
+      --card: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-side);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-frame {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--bg);
+      min-height: 100vh;
+      box-shadow: 0 0 0 1px var(--border);
+    }
+    h1, h2, .display {
+      font-family: 'Cinzel', 'Source Serif 4', serif;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; padding: 0 32px; max-width: 1100px; margin: 0 auto;
+    }
+    .nav-left, .nav-right { display: flex; gap: 28px; align-items: center; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--text-muted); }
+    .nav-left a:hover, .nav-right a:hover { color: var(--text); }
+    .logo {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 600;
+      letter-spacing: 0.14em; text-align: center;
+    }
+    .nav-cta {
+      background: var(--accent); color: #faf9f7; padding: 8px 16px;
+      font-size: 0.75rem; letter-spacing: 0.06em; border-radius: 2px;
+    }
+    .nav-cta:hover { opacity: 0.9; }
+
+    .hero {
+      padding: 100px 40px 90px;
+      text-align: center;
+      background: var(--bg);
+      position: relative;
+    }
+    .hero-art {
+      width: 100%; max-width: 720px; margin: 0 auto 48px;
+      aspect-ratio: 16/9; border-radius: 4px; overflow: hidden;
+      background: #2a2520;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+    .hero-art img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: sepia(0.15) contrast(1.05);
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7.5vw, 5.2rem);
+      line-height: 1.05;
+      max-width: 12ch;
+      margin: 0 auto 20px;
+    }
+    .hero p {
+      font-size: 1.05rem; color: var(--text-muted);
+      max-width: 38ch; margin: 0 auto 36px;
+    }
+    .hero-ctas {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; font-size: 0.85rem; font-weight: 500;
+      border-radius: 2px; border: none; cursor: pointer; transition: 0.15s;
+    }
+    .btn-primary { background: var(--accent); color: #faf9f7; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { background: rgba(0,0,0,0.03); }
+
+    .features {
+      background: var(--bg-white);
+      padding: 80px 40px 100px;
+      border-top: 1px solid var(--border);
+    }
+    .features-head { margin-bottom: 48px; }
+    .features-head h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 8px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    @media (max-width: 800px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .nav-left { display: none; }
+    }
+    .feature-card .num {
+      font-size: 0.7rem; letter-spacing: 0.1em; color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .feature-card h3 {
+      font-family: 'Cinzel', serif; font-size: 1.35rem; margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;
+    }
+    .feature-visual {
+      width: 100%; aspect-ratio: 4/3; border-radius: 3px;
+      background: linear-gradient(145deg, #3a332b 0%, #1e1a16 100%);
+      position: relative; overflow: hidden;
+    }
+    .feature-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+      opacity: 0.6;
+    }
+
+    .method {
+      padding: 80px 40px;
+      background: var(--bg);
+    }
+    .method-inner {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start;
+    }
+    @media (max-width: 800px) { .method-inner { grid-template-columns: 1fr; } }
+    .method h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 16px; }
+    .method .lead { color: var(--text-muted); margin-bottom: 0; max-width: 36ch; }
+    .steps { display: flex; flex-direction: column; gap: 22px; }
+    .step { display: flex; gap: 16px; }
+    .step-n {
+      font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--text-muted);
+      min-width: 28px;
+    }
+    .step h4 { font-size: 0.95rem; margin-bottom: 2px; }
+    .step p { font-size: 0.85rem; color: var(--text-muted); }
+
+    .custom {
+      padding: 80px 40px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border);
+    }
+    .custom h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 12px; }
+    .custom .lead { color: var(--text-muted); margin-bottom: 40px; max-width: 48ch; }
+    .custom-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    @media (max-width: 700px) { .custom-grid { grid-template-columns: 1fr; } }
+    .custom-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; padding: 28px;
+    }
+    .custom-card h3 { font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 10px; }
+    .custom-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px; }
+    .custom-card ul { list-style: none; font-size: 0.85rem; color: var(--text-muted); }
+    .custom-card li { padding: 4px 0 4px 14px; position: relative; }
+    .custom-card li::before { content: '–'; position: absolute; left: 0; }
+
+    .coming {
+      padding: 64px 40px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .coming h2 { font-size: 1.75rem; margin-bottom: 12px; }
+    .coming p {
+      color: var(--text-muted); max-width: 52ch; margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+    .quote {
+      padding: 80px 40px 100px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border);
+    }
+    .quote-box {
+      max-width: 480px; margin: 0 auto;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; padding: 40px 32px;
+    }
+    .quote-box h2 { font-size: 1.6rem; text-align: center; margin-bottom: 8px; }
+    .quote-box .sub {
+      text-align: center; color: var(--text-muted); font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .fg { margin-bottom: 14px; }
+    .fg label {
+      display: block; font-size: 0.7rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px;
+    }
+    .fg input, .fg select {
+      width: 100%; padding: 11px 12px; border: 1px solid var(--border);
+      border-radius: 2px; background: var(--bg-white); color: var(--text);
+      font-size: 0.9rem; outline: none;
+    }
+    .fg input:focus, .fg select:focus { border-color: var(--accent); }
+    .submit {
+      width: 100%; margin-top: 10px; padding: 13px;
+      background: var(--accent); color: #faf9f7; border: none;
+      border-radius: 2px; font-size: 0.9rem; font-weight: 500; cursor: pointer;
+    }
+    .submit:hover { opacity: 0.9; }
+
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 40px 40px 28px;
+    }
+    .foot-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 28px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 700px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+    .foot-brand .logo { margin-bottom: 8px; display: block; }
+    .foot-brand p { font-size: 0.8rem; color: var(--text-muted); max-width: 26ch; }
+    .foot-col h4 {
+      font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 12px;
+    }
+    .foot-col a {
+      display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .foot-col a:hover { color: var(--text); }
+    .foot-bottom {
+      border-top: 1px solid var(--border); padding-top: 18px;
+      font-size: 0.75rem; color: var(--text-muted);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-frame">
+    <nav>
+      <div class="nav-inner">
+        <div class="nav-left">
+          <a href="#features">Modules</a>
+          <a href="#method">Method</a>
+          <a href="#custom">Custom</a>
+        </div>
+        <a href="#" class="logo">CARSTAIR</a>
+        <div class="nav-right">
+          <a href="#coming">Free</a>
+          <a href="#quote" class="nav-cta">GET QUOTE</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-art">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2c241c"/>
+              <stop offset="50%" stop-color="#1a1510"/>
+              <stop offset="100%" stop-color="#0e0b08"/>
+            </linearGradient>
+            <filter id="grain">
+              <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/>
+              <feColorMatrix type="saturate" values="0"/>
+              <feBlend in="SourceGraphic" mode="overlay"/>
+            </filter>
+          </defs>
+          <rect width="800" height="450" fill="url(#g)"/>
+          <rect width="800" height="450" fill="#3a3028" opacity="0.3" filter="url(#grain)"/>
+          <path d="M120 420 Q400 40 680 420" fill="none" stroke="#c4b8a5" stroke-width="1.5" opacity="0.35"/>
+          <path d="M180 420 Q400 100 620 420" fill="none" stroke="#8a7f6e" stroke-width="1" opacity="0.25"/>
+          <circle cx="400" cy="200" r="48" fill="none" stroke="#c4b8a5" stroke-width="1" opacity="0.2"/>
+          <text x="400" y="390" text-anchor="middle" fill="#c4b8a5" font-family="Cinzel, serif" font-size="14" letter-spacing="6" opacity="0.5">CARSTAIR</text>
+        </svg>
+      </div>
+      <h1 class="display">Research under pressure</h1>
+      <p>Affordable institutional tools and materials for the masses. Strategies, methodologies, and systematic systems — built for anyone.</p>
+      <div class="hero-ctas">
+        <a href="#quote" class="btn btn-primary">Get a quote</a>
+        <a href="#features" class="btn btn-ghost">View modules</a>
+      </div>
+    </header>
+
+    <section class="features" id="features">
+      <div class="features-head">
+        <h2>Modules</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="num">#1 RESEARCH</div>
+          <h3>Strategy R&amp;D</h3>
+          <p>Design and evolve trading strategies and methodologies. Company-backed systems as the primary focus, open to all styles.</p>
+          <div class="feature-visual"></div>
+        </div>
+        <div class="feature-card">
+          <div class="num">#2 SYSTEMS</div>
+          <h3>Systematic Algorithms</h3>
+          <p>Encode methodologies into production-ready systematic trading algorithms with clear risk frameworks.</p>
+          <div class="feature-visual"></div>
+        </div>
+        <div class="feature-card">
+          <div class="num">#3 EVALUATE</div>
+          <h3>Evaluation Arenas</h3>
+          <p>Private environments and behavioural benchmarks for models and agents under live market pressure.</p>
+          <div class="feature-visual"></div>
+        </div>
+      </div>
+      <div class="features-grid" style="margin-top:32px">
+        <div class="feature-card">
+          <div class="num">#4 JUDGMENT</div>
+          <h3>Judgment Capture</h3>
+          <p>Structure expert reasoning and decision traces into high-signal data and RL environments.</p>
+          <div class="feature-visual"></div>
+        </div>
+        <div class="feature-card">
+          <div class="num">#5 INSIGHT</div>
+          <h3>Direct Insight</h3>
+          <p>Side service: 1:1 sessions for session bias, key levels, entry, stop and target framing.</p>
+          <div class="feature-visual"></div>
+        </div>
+        <div class="feature-card">
+          <div class="num">#6 FLEX</div>
+          <h3>Live &amp; Prop</h3>
+          <p>Works with live accounts and prop firms. Discretionary, systematic, multi-strategy, hybrid.</p>
+          <div class="feature-visual"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" id="method">
+      <div class="method-inner">
+        <div>
+          <h2>How systems are built</h2>
+          <p class="lead">Every strategy is treated as a living system. Observation, structure and deployment form a continuous loop under real market feedback.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="step-n">01</span>
+            <div>
+              <h4>Observe</h4>
+              <p>Deep market and macro study without bias. Rigorous data, quiet conviction.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">02</span>
+            <div>
+              <h4>Structure</h4>
+              <p>Turn insight into edge. Systematic frameworks, risk-first architecture, asymmetric positioning.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">03</span>
+            <div>
+              <h4>Deploy</h4>
+              <p>Execute with discipline. Capital deployed precisely. Outcomes compound.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-n">04</span>
+            <div>
+              <h4>Evaluate</h4>
+              <p>Live arenas and trajectory recording. Every checkpoint scored against reality.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="custom" id="custom">
+      <h2>Bring an idea. Leave with a system.</h2>
+      <p class="lead">Request a specific strategy or methodology for further development. Quotes can be offset by a 5–15% performance share on profitable trades using the delivered software.</p>
+      <div class="custom-grid">
+        <div class="custom-card">
+          <h3>Methodology Package</h3>
+          <p>We research, refine and document a complete trading methodology around your idea or mandate.</p>
+          <ul>
+            <li>Full written methodology</li>
+            <li>Risk parameters and invalidation rules</li>
+            <li>Session and regime guidance</li>
+            <li>Quote-based engagement</li>
+          </ul>
+        </div>
+        <div class="custom-card">
+          <h3>Systematic Algorithm</h3>
+          <p>Encode the methodology into a production-ready systematic trading algorithm.</p>
+          <ul>
+            <li>Executable system design</li>
+            <li>Clear entry, exit and risk logic</li>
+            <li>Compatible with live accounts or prop firms</li>
+            <li>Optional 5–15% performance share offset</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="coming" id="coming">
+      <h2>Coming soon — free for everyone</h2>
+      <p>Completely free content for free users is on the way: research notes, papers, full methodologies, strategies and practical tools. No paywall on the core knowledge layer.</p>
+    </section>
+
+    <section class="quote" id="quote">
+      <div class="quote-box">
+        <h2>Get a quote</h2>
+        <p class="sub">Tell us what you need. Any email works.</p>
+        <form onsubmit="handleQuote(event)">
+          <div class="fg">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+1 555 000 0000" />
+          </div>
+          <div class="fg">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" />
+          </div>
+          <div class="fg">
+            <label for="intent">Intent</label>
+            <select id="intent" name="intent" required>
+              <option value="">Select intent</option>
+              <option value="strategy-rd">Strategy R&amp;D / methodology</option>
+              <option value="algorithm">Systematic algorithm development</option>
+              <option value="evaluation">Evaluation environments</option>
+              <option value="insight">Direct insight session</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="note">Brief note (optional)</label>
+            <input type="text" id="note" name="note" placeholder="Context or specific request" />
+          </div>
+          <button type="submit" class="submit">Quote</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <span class="logo">CARSTAIR</span>
+          <p>Affordable institutional tools for quantitative finance. Built for anyone.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Modules</h4>
+          <a href="#features">Strategy R&amp;D</a>
+          <a href="#features">Systematic Algorithms</a>
+          <a href="#features">Evaluation</a>
+        </div>
+        <div class="foot-col">
+          <h4>Work</h4>
+          <a href="#custom">Custom Development</a>
+          <a href="#method">Method</a>
+          <a href="#coming">Free content</a>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <a href="#quote">Get a quote</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Carstair</span>
+        <span>Built for the masses</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function handleQuote(e) {
+      e.preventDefault();
+      const phone = document.getElementById('phone').value;
+      const email = document.getElementById('email').value;
+      const intent = document.getElementById('intent').value;
+      alert('Quote request received.\n\nPhone: ' + phone + '\nEmail: ' + email + '\nIntent: ' + intent);
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
